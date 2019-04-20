@@ -9,6 +9,7 @@ export default class App extends Component{
 
     this.state = {
       dataSource: [{key:1, name:'const abc item'}, {key:2, name:'const def item'}],
+      selectedUser:"NoOne"
     };
     this.getRemoteData();
   }
@@ -49,14 +50,22 @@ export default class App extends Component{
 
   onPressItem = (item) => {
     const email = item.email;
-    console.log("onPress email with item: " + item.email);
+
+    this.setState({
+      selectedUser:item.name.last
+    });
+    // console.log("onPress email with item: " + item.email);
     // this.props.navigation.navigate('Detail', {item: item})
   }
   
   render() {
     return (
       <View>
+        <Text style={{ margin: 30, marginBottom: 1 }}>
+          Current User is: {this.state.selectedUser}
+        </Text>
         <FlatList
+          // style={{ margin:50 }}
           data={this.state.data}
           renderItem={({item}) => this.renderNativeItem(item)}
         />
@@ -102,16 +111,16 @@ export default class App extends Component{
 //   };
 // }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  text: {
-    fontSize: 16,
-  }
-});
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     alignItems: 'center',
+//     justifyContent: 'center',
+//   },
+//   text: {
+//     fontSize: 16,
+//   }
+// });
 
 // export default createStackNavigator({
 //   Home: HomeScreen,
