@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { Button, Text, StyleSheet, View, FlatList, Image } from 'react-native';
 // import { createStackNavigator } from 'react-navigation';
-import { ListItem } from "react-native-elements"
+import { ListItem, SearchBar } from "react-native-elements"
 
 export default class App extends Component{
   constructor() {
@@ -64,6 +64,15 @@ export default class App extends Component{
         <Text style={{ margin: 30, marginBottom: 1 }}>
           Current User is: {this.state.selectedUser}
         </Text>
+
+        <SearchBar        
+          placeholder="Type Here..."        
+          lightTheme        
+          round        
+          // onChangeText={text => this.searchFilterFunction(text)}
+          autoCorrect={false}             
+        /> 
+
         <FlatList
           // style={{ margin:50 }}
           data={this.state.data}
