@@ -9,7 +9,8 @@ export default class App extends Component{
 
     this.state = {
       dataSource: [{key:1, name:'const abc item'}, {key:2, name:'const def item'}],
-      selectedUser:"NoOne"
+      selectedUser:"NoOne",
+      searchText:""
     };
     this.getRemoteData();
   }
@@ -58,6 +59,18 @@ export default class App extends Component{
     // this.props.navigation.navigate('Detail', {item: item})
   }
   
+  searchFilterFunction = text => {    
+    const newData = this.state.data.filter(item => {      
+      const itemData = `${item.name.title.toUpperCase()}   
+      ${item.name.first.toUpperCase()} ${item.name.last.toUpperCase()}`;
+       const textData = text.toUpperCase();
+        
+       return itemData.indexOf(textData) > -1;    
+    });    
+    this.setState({ data: newData, searchText: this.textData });  
+  };
+
+
   render() {
     return (
       <View>
@@ -66,11 +79,13 @@ export default class App extends Component{
         </Text>
 
         <SearchBar        
-          placeholder="Type Here..."        
-          lightTheme        
+                       
           round        
-          // onChangeText={text => this.searchFilterFunction(text)}
-          autoCorrect={false}             
+          onChangeText={text => this.searchFilterFunction(text)}
+          // onClearText={method}
+          autoCorrect={false}
+          placeholder="Type Here..."
+          value={this.searchText}          
         /> 
 
         <FlatList
